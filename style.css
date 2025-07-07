@@ -673,11 +673,14 @@ footer a:hover {
   }
 
   .hours-day {
-    font-size: 1rem;
+    display: flex;
+    flex-direction: column;
     padding: 10px 0;
+    font-size: 1rem;
   }
 
-  .day-name, .day-hours {
+  .day-name,
+  .day-hours {
     flex: none;
     display: block;
     text-align: left;
