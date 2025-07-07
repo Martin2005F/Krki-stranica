@@ -359,7 +359,6 @@ function loadData() {
 // Initial load
 loadData();
 
-// Dodaj početne kategorije ako nema nijedne
 if (categories.length === 0) {
   categories = [
     { id: Date.now().toString(), name: "Kebab", description: "", sortOrder: 1, active: true },
@@ -368,7 +367,6 @@ if (categories.length === 0) {
   saveData();
 }
 
-// Dodaj početne stavke jelovnika ako nema nijedne
 if (menuItems.length === 0) {
   menuItems = [
     {
@@ -426,8 +424,11 @@ if (menuItems.length === 0) {
   ];
   saveData();
 }
+
 renderCategories();
 renderMenuItems();
 renderOrders();
+renderAnalytics();
+
 renderAnalytics();
 
