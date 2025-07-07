@@ -357,74 +357,54 @@ function loadData() {
 }
 
 // Initial load
+const defaultCategories = [
+  { id: "1", name: "Kebab", description: "", sortOrder: 0, active: true },
+  { id: "2", name: "Pića", description: "", sortOrder: 1, active: true },
+];
+
+const defaultMenuItems = [
+  {
+    id: "1",
+    name: "Pileći Kebab",
+    price: 8.5,
+    description: "Sočno pečeno pileće meso ...",
+    category: "Kebab",
+    sortOrder: 0,
+    available: true,
+    image: "Chicken kebab.avif",
+  },
+  {
+    id: "2",
+    name: "Coca-cola",
+    price: 2.5,
+    description: "Klasična gazirana Coca-Cola.",
+    category: "Pića",
+    sortOrder: 0,
+    available: true,
+    image: "coca-cola.jpg",
+  },
+  // Dodaj ostale stavke...
+];
+
+// Funkcija za učitavanje podataka s početkom defaulta
+function loadData() {
+  categories = JSON.parse(localStorage.getItem("categories"));
+  menuItems = JSON.parse(localStorage.getItem("menuItems"));
+
+  // Ako nema podataka u localStorage, postavi default i spremi
+  if (!categories || categories.length === 0) {
+    categories = defaultCategories;
+    localStorage.setItem("categories", JSON.stringify(categories));
+  }
+
+  if (!menuItems || menuItems.length === 0) {
+    menuItems = defaultMenuItems;
+    localStorage.setItem("menuItems", JSON.stringify(menuItems));
+  }
+}
+
+// Na početku koda pozovi loadData
 loadData();
-
-if (categories.length === 0) {
-  categories = [
-    { id: Date.now().toString(), name: "Kebab", description: "", sortOrder: 1, active: true },
-    { id: (Date.now() + 1).toString(), name: "Pića", description: "", sortOrder: 2, active: true },
-  ];
-  saveData();
-}
-
-if (menuItems.length === 0) {
-  menuItems = [
-    {
-      id: (Date.now() + 2).toString(),
-      name: "Pileći Kebab",
-      price: 8.5,
-      category: "Kebab",
-      image: "Chicken kebab.avif",
-      description: "Sočno pečeno pileće meso s mediteranskim začinima i svježim povrćem.",
-      prepTime: 15,
-      ingredients: "pileće meso, začini, povrće",
-      allergens: "",
-      sortOrder: 1,
-      available: true,
-    },
-    {
-      id: (Date.now() + 3).toString(),
-      name: "Juneći Kebab",
-      price: 9.0,
-      category: "Kebab",
-      image: "lamb Kebab.avif",
-      description: "Ukusan juneći kebab mariniran u aromatičnim začinima i lagano pečen.",
-      prepTime: 20,
-      ingredients: "juneće meso, začini",
-      allergens: "",
-      sortOrder: 2,
-      available: true,
-    },
-    {
-      id: (Date.now() + 4).toString(),
-      name: "Coca-cola",
-      price: 2.5,
-      category: "Pića",
-      image: "coca-cola.jpg",
-      description: "Klasična gazirana Coca-Cola.",
-      prepTime: 0,
-      ingredients: "",
-      allergens: "",
-      sortOrder: 1,
-      available: true,
-    },
-    {
-      id: (Date.now() + 5).toString(),
-      name: "Fanta",
-      price: 2.0,
-      category: "Pića",
-      image: "fanta.jpg",
-      description: "Ukusan narančasti gazirani sok.",
-      prepTime: 0,
-      ingredients: "",
-      allergens: "",
-      sortOrder: 2,
-      available: true,
-    }
-  ];
-  saveData();
-}
-
 renderCategories();
 renderMenuItems();
 renderOrders();
