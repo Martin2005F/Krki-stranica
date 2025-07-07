@@ -1,0 +1,505 @@
+/* Root variables */
+:root {
+  --primary: #007bff;
+  --primary-dark: #0056b3;
+  --gray-bg: #f9f9f9;
+  --white: #ffffff;
+  --black: #000000;
+  --muted: #666666;
+  --border: #ddd;
+  --shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--gray-bg);
+  color: var(--black);
+}
+
+.admin-header {
+  background-color: var(--black);
+  color: var(--white);
+  text-align: center;
+  padding: 20px 0;
+  animation: fadeInDown 0.7s ease forwards;
+}
+
+.admin-header .highlight {
+  color: #f4b400;
+}
+
+.admin-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin: 20px 0;
+  animation: fadeInUp 0.7s ease forwards;
+}
+
+.admin-tab {
+  background-color: #f0f0f0;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: 0.3s;
+  opacity: 0.8;
+  transform: scale(0.95);
+  animation: scaleIn 0.4s ease forwards;
+}
+
+.admin-tab.active {
+  background-color: var(--white);
+  font-weight: 600;
+  box-shadow: var(--shadow);
+  opacity: 1;
+  transform: scale(1);
+}
+
+.admin-tab:hover:not(.active) {
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+.admin-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  animation: fadeIn 1s ease forwards;
+}
+
+.admin-panel {
+  background: var(--white);
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  padding: 25px;
+  margin-bottom: 40px;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeSlideIn 0.6s ease forwards;
+}
+
+/* Animacija se resetira za panel koji nije aktivan */
+.admin-panel[style*="display: none"] {
+  opacity: 0 !important;
+  transform: translateY(20px) !important;
+  animation: none !important;
+}
+
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.panel-header h2 {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.add-btn {
+  background-color: var(--primary);
+  color: var(--white);
+  padding: 10px 14px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.add-btn:hover {
+  background-color: var(--primary-dark);
+  transform: scale(1.05);
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px;
+}
+
+/* Animacija kartica */
+.card {
+  background-color: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeSlideIn 0.5s ease forwards;
+}
+
+/* Dodaj delay animacije kartic */
+.card:nth-child(1) {
+  animation-delay: 0.1s;
+}
+.card:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.card:nth-child(3) {
+  animation-delay: 0.3s;
+}
+.card:nth-child(4) {
+  animation-delay: 0.4s;
+}
+.card:nth-child(5) {
+  animation-delay: 0.5s;
+}
+
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card h3 {
+  font-size: 16px;
+  margin: 0 0 8px;
+}
+
+.card p {
+  color: var(--muted);
+  font-size: 14px;
+  margin-bottom: 16px;
+}
+
+.card .status {
+  background-color: #e7f1ff;
+  color: var(--primary);
+  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 12px;
+}
+
+.card-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.card-actions button {
+  background-color: #f1f1f1;
+  border: none;
+  padding: 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.card-actions button:hover {
+  background-color: #ddd;
+  transform: scale(1.1);
+}
+
+/* Modal */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.modal-overlay.show {
+  display: flex;
+  opacity: 1;
+}
+
+.modal {
+  background-color: var(--white);
+  padding: 20px 25px;
+  border-radius: 12px;
+  max-width: 400px;
+  width: 90%;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  position: relative;
+  max-height: 80vh;
+  overflow-y: auto;
+  opacity: 0;
+  transform: translateY(-30px);
+  animation: modalFadeIn 0.4s ease forwards;
+}
+
+.modal-close {
+  position: absolute;
+  right: 16px;
+  top: 16px;
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.modal form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.modal input,
+.modal textarea,
+.modal select {
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  font-size: 14px;
+}
+
+.modal button[type="submit"] {
+  background-color: var(--primary);
+  color: white;
+  padding: 10px;
+  font-size: 15px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.modal button[type="submit"]:hover {
+  background-color: var(--primary-dark);
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.modal-buttons .danger {
+  background-color: #e53935;
+  color: white;
+}
+
+.modal-buttons .danger:hover {
+  background-color: #c62828;
+}
+
+/* Orders Panel Styling */
+.order-card {
+  background-color: var(--white);
+  border-radius: 10px;
+  box-shadow: var(--shadow);
+  padding: 20px;
+  margin-bottom: 20px;
+  border-left: 6px solid var(--primary);
+  transition: box-shadow 0.3s ease;
+  opacity: 0;
+  transform: translateX(-20px);
+  animation: slideInLeft 0.5s ease forwards;
+}
+
+.order-card:hover {
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
+}
+
+.order-card h4 {
+  margin-top: 0;
+  font-size: 18px;
+  color: var(--primary-dark);
+}
+
+.order-card p {
+  font-size: 14px;
+  color: var(--muted);
+  margin: 4px 0;
+}
+
+.order-card ul {
+  padding-left: 20px;
+  margin: 10px 0;
+}
+
+.order-card ul li {
+  font-size: 14px;
+  color: var(--black);
+  margin-bottom: 4px;
+}
+
+.order-card .total {
+  font-weight: bold;
+  margin-top: 10px;
+  font-size: 15px;
+  color: var(--black);
+}
+
+.delete-order-btn {
+  background-color: #e53935;
+  color: white;
+  padding: 8px 14px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  margin-top: 12px;
+  transition: background-color 0.3s ease;
+}
+
+.delete-order-btn:hover {
+  background-color: #c62828;
+}
+
+.order-card.empty {
+  background-color: #f1f1f1;
+  color: var(--muted);
+  text-align: center;
+  font-style: italic;
+  padding: 30px;
+  border-left: none;
+}
+
+/* Analytics Cards Styling */
+.analytics-cards {
+  display: flex;
+  gap: 20px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.analytics-card {
+  background-color: var(--white);
+  padding: 20px 30px;
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  flex: 1 1 200px;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeSlideIn 0.6s ease forwards;
+}
+
+.analytics-card:nth-child(1) {
+  animation-delay: 0.1s;
+}
+.analytics-card:nth-child(2) {
+  animation-delay: 0.3s;
+}
+.analytics-card:nth-child(3) {
+  animation-delay: 0.5s;
+}
+.analytics-card:nth-child(4) {
+  animation-delay: 0.7s;
+}
+
+.analytics-number {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.analytics-label {
+  font-size: 1rem;
+  color: var(--muted);
+  margin-top: 6px;
+}
+
+.complete-order-btn {
+  background-color: #28a745; /* zelena boja */
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  margin-top: 12px;
+  transition: background-color 0.3s ease;
+}
+
+.complete-order-btn:hover {
+  background-color: #218838; /* tamnija zelena */
+}
+
+/* Animacije */
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
