@@ -74,6 +74,77 @@ body {
   color: var(--gold);
 }
 
+/* Hamburger Button */
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 28px;
+  height: 22px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 1001;
+}
+
+.nav-toggle:focus {
+  outline: none;
+}
+
+.hamburger-line {
+  width: 100%;
+  height: 3px;
+  background-color: var(--gold);
+  border-radius: 2px;
+  transition: all 0.3s ease;
+  transform-origin: 1px;
+}
+
+/* Hamburger Animation on open */
+.nav-toggle.open .hamburger-line:nth-child(1) {
+  transform: rotate(45deg);
+}
+
+.nav-toggle.open .hamburger-line:nth-child(2) {
+  opacity: 0;
+  transform: translateX(20px);
+}
+
+.nav-toggle.open .hamburger-line:nth-child(3) {
+  transform: rotate(-45deg);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .nav-links {
+    position: fixed;
+    top: 64px; /* visina navbar-a */
+    right: 0;
+    height: calc(100% - 64px);
+    width: 250px;
+    background-color: var(--dark-bg);
+    flex-direction: column;
+    gap: 20px;
+    padding: 40px 20px;
+    box-shadow: -4px 0 15px rgba(0, 0, 0, 0.2);
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+    z-index: 1000;
+  }
+
+  .nav-links.open {
+    transform: translateX(0);
+  }
+
+  .nav-links a {
+    font-size: 1.2rem;
+    font-weight: 700;
+  }
+
+  .nav-toggle {
+    display: flex;
+  }
+}
 /* Hero Section */
 .hero {
   height: 100vh;
